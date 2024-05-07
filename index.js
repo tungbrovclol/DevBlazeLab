@@ -1,19 +1,17 @@
-function trap(height) {
-  let left = 0;
-  let right = height.length - 1;
-  let leftMax = 0;
-  let rightMax = 0;
-  let waterTrapped = 0;
-  while (left < right) {
-    if (height[left] < height[right]) {
-      if (height[left] >= leftMax) leftMax = height[left];
-      else waterTrapped += leftMax - height[left];
-      left++;
+function serialize(root) {
+  const result = [];
+  const queue = [root];
+  while (queue.length) {
+    const node = queue.shift();
+    if (node) {
+      result.push(node.val);
+      queue.push(node.left, node.right);
     } else {
-      if (height[right] >= rightMax) rightMax = height[right];
-      else waterTrapped += rightMax - height[right];
-      right--;
+      result.push(null);
     }
   }
-  return waterTrapped;
+  while (result[result.length - 1] === null) {
+    result.pop();
+  }
+  return result;
 }
