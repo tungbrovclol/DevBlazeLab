@@ -1,17 +1,13 @@
-function serialize(root) {
-  const result = [];
-  const queue = [root];
-  while (queue.length) {
-    const node = queue.shift();
-    if (node) {
-      result.push(node.val);
-      queue.push(node.left, node.right);
-    } else {
-      result.push(null);
+function wiggleMaxLength(nums) {
+  if (nums.length === 0) return 0;
+  let up = 1;
+  let down = 1;
+  for (let i = 1; i < nums.length; i++) {
+    if (nums[i] > nums[i - 1]) {
+      up = down + 1;
+    } else if (nums[i] < nums[i - 1]) {
+      down = up + 1;
     }
   }
-  while (result[result.length - 1] === null) {
-    result.pop();
-  }
-  return result;
+  return Math.max(up, down);
 }
