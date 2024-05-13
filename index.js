@@ -1,3 +1,1 @@
-function getMax(arr) {
-  return Math.max(...arr);
-}
+const compact = (arr) => arr.filter(Boolean);
